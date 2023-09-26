@@ -1,3 +1,14 @@
+# PROJET OMATOS
+### "LOCATION MATERIEL VOYAGE"
+
+Le but de ce site :
+
+* proposer des locations en tarifs journaliers
+* le client aura une ou plusieurs réservations à son nom
+* la visibilité des produits sera disponibles/non disponibles
+* le client pourra faire une estimation d'un forfait selon une période choisie (via calendrier) en ajoutant un produit (via un click sur "ajouter")
+
+
 ## Installation de
 
 * composer symfony/var-dumper
