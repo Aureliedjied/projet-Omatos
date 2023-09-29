@@ -18,18 +18,20 @@ CREATE TABLE `clients` (
 ) 
 ENGINE = InnoDB;
 
-
-
 CREATE TABLE `items` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(45) NOT NULL COMMENT 'Le nom du produit',
   `description` TEXT NULL COMMENT 'La description du produit',
   `picture` VARCHAR(128) NULL COMMENT 'L\'URL de l\'image du produit',
   `price` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT 'Le tarif journalier',
-  `category` VARCHAR(45) NOT NULL COMMENT 'La catégorie du produit'
+  `stock` INT(11) NOT NULL DEFAULT O COMMENT 'Le stock du produit';
 )
-ENGINE = InnoDB;
+UPDATE `items`
+SET `stock` = FLOOR(RAND() * 100) + 1;
 
+-- ici je demande des valeurs aléatoires entre 1 et 100
+
+ENGINE = InnoDB;
 
 
 CREATE TABLE `reservations` (
@@ -39,6 +41,18 @@ CREATE TABLE `reservations` (
   `client_id` INT UNSIGNED NOT NULL,
   `item_id` INT UNSIGNED NOT NULL,
   FOREIGN KEY (`client_id`) REFERENCES `clients`(`id`),
+  FOREIGN KEY (`item_id`) REFERENCES `items`(`id`)
+)
+ENGINE = InnoDB;
+
+-- Table many to many
+
+CREATE TABLE `reservation_items` (
+  `reservation_id` INT UNSIGNED NOT NULL,
+  `item_id` INT UNSIGNED NOT NULL,
+  `quantite` INT NOT NULL,
+  PRIMARY KEY (`reservation_id`, `item_id`),
+  FOREIGN KEY (`reservation_id`) REFERENCES `reservations`(`id`),
   FOREIGN KEY (`item_id`) REFERENCES `items`(`id`)
 )
 ENGINE = InnoDB;
@@ -54,22 +68,22 @@ COMMIT;
 
 
 START TRANSACTION;
-INSERT INTO items (name, description, picture, price, category)
+INSERT INTO items (name, description, picture, price)
 VALUES
-    ('Drone DJI Mavic Air 2', 'Drone compact avec une excellente qualité d\'image.', 'assets/images/produits/djiMAvicAir.jpg', 19.99, 'drone'),
+    ('Drone DJI Mavic Air 2', 'Drone compact avec une excellente qualité d\'image.', 'assets/images/produits/djiMAvicAir.jpg', 19.99),
 
-    ('Appareil Photo Sony Alpha A7III', 'Appareil photo plein format avec 24,2 mégapixels.', 'assets/images/produits/sonyA7III.jpg', 15.99, 'photo'),
+    ('Appareil Photo Sony Alpha A7III', 'Appareil photo plein format avec 24,2 mégapixels.', 'assets/images/produits/sonyA7III.jpg', 15.99),
 
-    ('Caméra de Voyage GoPro Hero 9', 'Caméra d\'action 4K avec écran tactile.', 'assets/images/produits/gopro.jpg', 19.99, 'camera'),
+    ('Caméra de Voyage GoPro Hero 9', 'Caméra d\'action 4K avec écran tactile.', 'assets/images/produits/gopro.jpg', 19.99),
 
-    ('Drone DJI Phantom 4 Pro', 'Drone professionnel avec caméra 4K.', 'assets/images/produits/djiPhantom4.jpg', 29.99, 'drone'),
+    ('Drone DJI Phantom 4 Pro', 'Drone professionnel avec caméra 4K.', 'assets/images/produits/djiPhantom4.jpg', 29.99),
 
-    ('Appareil Photo Canon EOS 5D Mark IV', 'Appareil photo reflex numérique haut de gamme.', 'assets/images/produits/canonMark.jpg', 19.99, 'photo'),
+    ('Appareil Photo Canon EOS 5D Mark IV', 'Appareil photo reflex numérique haut de gamme.', 'assets/images/produits/canonMark.jpg', 19.99),
 
-    ('Caméra de Voyage Panasonic Lumix GX9', 'Caméra compacte avec stabilisation d\'image.', 'assets/images/produits/panasonicLumix.jpg', 24.99, 'camera'),
+    ('Caméra de Voyage Panasonic Lumix GX9', 'Caméra compacte avec stabilisation d\'image.', 'assets/images/produits/panasonicLumix.jpg', 24.99),
 
-    ('Drone DJI Mini 2', 'Drone ultra-léger et compact pour les débutants.', 'assets/images/produits/mini2.jpg', 19.99, 'drone'),
+    ('Drone DJI Mini 2', 'Drone ultra-léger et compact pour les débutants.', 'assets/images/produits/mini2.jpg', 19.99),
 
-    ('Appareil Photo Olympus OM-D', 'Appareil photo 4K reflex numérique avec 30,9 mégapixels.', 'assets/images/produits/olympus.jpg', 9.99, 'photo');
+    ('Appareil Photo Olympus OM-D', 'Appareil photo 4K reflex numérique avec 30,9 mégapixels.', 'assets/images/produits/olympus.jpg', 9.99);
 
   COMMIT;

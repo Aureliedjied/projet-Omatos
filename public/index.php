@@ -29,6 +29,35 @@ $router->map(
     'main-home'
 );
 
+$router->map(
+    'GET',
+    '/produits',
+    [
+        'method' => 'list',
+        'controller' => '\App\Controllers\ProduitController' 
+    ],
+    'produits-list'
+);
+
+$router->map(
+    'GET',
+    '/produit/[i:id]',
+    [
+        'method' => 'listOne',
+        'controller' => '\App\Controllers\ProduitController' 
+    ],
+    'produit-detail'
+);
+
+$router->map(
+    'GET',
+    '/connexion',
+    [
+        'method' => 'login',
+        'controller' => '\App\Controllers\ClientController'
+    ],
+    'client-login'
+);
 
 
 
