@@ -8,11 +8,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('main-home') ?>">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link" href="<?= $router->generate('produits-list') ?>">Produits</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">Panier</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('client-login') ?>">Connexion</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('client-panier') ?>">Panier</a></li>
+                        <?php if(!isset($_SESSION["client"])): ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $router->generate('client-login') ?>">Connexion</a>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $router->generate('client-logout') ?>">Deconnexion</a>
+                    </li>
+                <?php endif ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('client-add') ?>">S'inscrire</a></li>
                     </ul>
                 </div>
             </div>

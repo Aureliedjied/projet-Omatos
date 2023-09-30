@@ -12,24 +12,15 @@ class Client extends CoreModel
     private $email;
     private $password;
 
-    public static function findAll()
-    {
-        $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM `clients`';
-        $pdoStatement = $pdo->query($sql);
-        $clients = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Client');
 
-        return $clients;
-    }
-
-    public static function find(int $id)
+    public static function findbyEmail($email)
     {
 
         $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM `clients` WHERE `id` = :id' ;
+        $sql = 'SELECT * FROM `clients` WHERE `email` = :email' ;
         $query = $pdo->prepare($sql);
-        $client = $query->execute([
-            ":id" => $id
+        $result = $query->execute([
+            ":email" => $email
         ]);
 
         $client = $query->fetchObject('App\Models\Client');
@@ -39,6 +30,30 @@ class Client extends CoreModel
     }
 
 
+    public function insert()
+    {
+        // j'appelle PDO
+        $pdo = Database::getPDO();
+        $sql = "INSERT INTO clients (email, password, name, adresse) VALUES (:email, :password, :name, :adresse)";
+        $query = $pdo->prepare($sql);
+        $client = $query->execute([
+            ":email" => $this->email,
+            ":password" => $this->password,
+            ":name" => $this->name,
+            ":adresse" => $this->adresse
+
+        ]);
+
+        if($client){
+            // ici on récupère l'id généré par l'insert en bdd
+            $this->id = $pdo->lastInsertId();
+        }
+
+        return $client;
+    }
+
+
+    
     public function getAdresse()
     {
         return $this->adresse;

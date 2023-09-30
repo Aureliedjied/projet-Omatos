@@ -9,6 +9,7 @@
                 <div class="col-lg-4 col-sm-6 mb-4">
                     <!-- Portfolio item -->
                     <div class="portfolio-item">
+                    <a class="portfolio-link" data-bs-toggle="modal" href="#" onclick="ajouterAuPanier('<?= $produit->getId() ?>')">
                         <a class="portfolio-link" data-bs-toggle="modal" href="<?= $router->generate('produit-detail', ['id' => $produit->getId()])?>">
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -18,6 +19,9 @@
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading"><?= $produit->getName() ?></div>
                             <div class="portfolio-caption-subheading text-muted"><?= $produit->getPrice() ?>€</div>
+                            <button class="btn btn-primary" onclick="ajouterAuPanier('<?= $produit->getId() ?>')">
+                            <i class="fas fa-shopping-cart"></i> Ajouter au Panier
+                        </button>
                         </div>
                     </div>
                 </div>

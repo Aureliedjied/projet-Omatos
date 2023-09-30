@@ -2,7 +2,7 @@
 
 
 require_once '../vendor/autoload.php';
-// session_start();
+session_start();
 
 $router = new AltoRouter();
 
@@ -59,6 +59,56 @@ $router->map(
     'client-login'
 );
 
+$router->map(
+    'GET',
+    '/deconnexion',
+    [
+        'method' => 'logout',
+        'controller' => '\App\Controllers\ClientController'
+    ],
+    'client-logout'
+);
+
+$router->map(
+    'POST',
+    '/connexion',
+    [
+        'method' => 'loginValid',
+        'controller' => '\App\Controllers\ClientController' 
+    ],
+    'client-loginValid'
+);
+
+
+$router->map(
+    'GET',
+    '/panier',
+    [
+        'method' => 'listPanier',
+        'controller' => '\App\Controllers\ReservationController'
+    ],
+    'client-panier'
+);
+
+$router->map(
+    'GET',
+    '/client',
+    [
+        'method' => 'add',
+        'controller' => '\App\Controllers\ClientController' 
+    ],
+    'client-add'
+);
+$router->map(
+    'POST',
+    '/client',
+    [
+        'method' => 'addValid',
+        'controller' => '\App\Controllers\ClientController' 
+    ],
+    'client-addValid'
+);
+
 
 
 
@@ -69,10 +119,6 @@ $router->map(
 
 $match = $router->match();
 
-// Ensuite, pour dispatcher le code dans la bonne méthode, du bon Controller
-// On délègue à une librairie externe : https://packagist.org/packages/benoclock/alto-dispatcher
-// 1er argument : la variable $match retournée par AltoRouter
-// 2e argument : le "target" (controller & méthode) pour afficher la page 404
 $dispatcher = new Dispatcher($match, '\App\Controllers\ErrorController::err404');
 // Une fois le "dispatcher" configuré, on lance le dispatch qui va exécuter la méthode du controller
 $dispatcher->dispatch();
