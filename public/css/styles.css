@@ -97,7 +97,7 @@ body {
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
-  color: var(--bs-body-color);
+  color: #c1cfdd;
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
   -webkit-text-size-adjust: 100%;
@@ -304,7 +304,7 @@ figure {
   margin: 0 0 1rem;
 }
 
-img,
+images
 svg {
   vertical-align: middle;
 }
@@ -11257,7 +11257,7 @@ header.masthead .masthead-heading {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
+  background-image: url("../assets/images/map-image.png");
   background-repeat: no-repeat;
   background-position: center;
 }

@@ -9,7 +9,7 @@
                 <div class="col-lg-4 col-sm-6 mb-4">
                     <!-- Portfolio item -->
                     <div class="portfolio-item">
-                    <a class="portfolio-link" data-bs-toggle="modal" href="#" onclick="ajouterAuPanier('<?= $produit->getId() ?>')">
+
                         <a class="portfolio-link" data-bs-toggle="modal" href="<?= $router->generate('produit-detail', ['id' => $produit->getId()])?>">
                             <div class="portfolio-hover">
                                 <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
@@ -17,12 +17,15 @@
                             <img class="img-fluid" src="<?= $produit->getPicture()?>" alt="image du produit" />
                         </a>
                         <div class="portfolio-caption">
-                            <div class="portfolio-caption-heading"><?= $produit->getName() ?></div>
-                            <div class="portfolio-caption-subheading text-muted"><?= $produit->getPrice() ?>€</div>
-                            <button class="btn btn-primary" onclick="ajouterAuPanier('<?= $produit->getId() ?>')">
-                            <i class="fas fa-shopping-cart"></i> Ajouter au Panier
+                        <div class="portfolio-caption-heading"><?= $produit->getName() ?></div>
+                        <div class="portfolio-caption-subheading text-muted"><?= $produit->getPrice() ?>€</div>
+                    </div>
+                        <div>
+                        <button class="btn btn-primary" id="produit<?= $produit->getName() ?>">
+                        <input type="number" id="quantiteProduit<?= $produit->getId() ?>" value="0" min="0">
+                        <i class="fas fa-shopping-cart"></i> Ajouter au Panier
                         </button>
-                        </div>
+                    </div>
                     </div>
                 </div>
             <?php endforeach; ?>

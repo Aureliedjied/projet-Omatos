@@ -41,7 +41,7 @@ $router->map(
 
 $router->map(
     'GET',
-    '/produit/[i:id]',
+    '/produit[i:id]',
     [
         'method' => 'listOne',
         'controller' => '\App\Controllers\ProduitController' 

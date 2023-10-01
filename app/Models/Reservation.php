@@ -8,10 +8,11 @@ use PDO;
 
 class Reservation extends CoreModel
 {
-    private $date_commande;
+    private $date_debut;
     private $date_retour;
     private $client_id;
-    private $item_id;
+    private $status;
+   
 
 
     public static function findAll()
@@ -40,17 +41,6 @@ class Reservation extends CoreModel
         return $reservation;
     }
 
-    public function getDate_commande()
-    {
-        return $this->date_commande;
-    }
-
-
-    public function setDate_commande($date_commande)
-    {
-        $this->date_commande = $date_commande;
-
-    }
 
     public function getDate_retour()
     {
@@ -76,16 +66,26 @@ class Reservation extends CoreModel
 
     }
 
-
-    public function getItem_id()
+    public function getStatus()
     {
-        return $this->item_id;
+        return $this->status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+    }
+
+    public function getDate_debut()
+    {
+        return $this->date_debut;
     }
 
 
-    public function setItem_id($item_id)
+    public function setDate_debut($date_debut)
     {
-        $this->item_id = $item_id;
+        $this->date_debut = $date_debut;
 
     }
 }

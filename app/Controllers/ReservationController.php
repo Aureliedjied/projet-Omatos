@@ -13,4 +13,6 @@ public function listPanier()
     {
         $this->show("client/panier");
     }
+
+    
 }
