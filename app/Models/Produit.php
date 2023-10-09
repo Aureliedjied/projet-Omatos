@@ -43,12 +43,12 @@ class Produit extends CoreModel
 
         if (!$produit) {
             
-            return null;
+           echo "Une erreur s'est produite lors de la récupération du produit  ";
         }
 
         // Ici je prévoie la rupture : si le stock de mon produit est = ou inferieur à 0 :
         if ($produit->stock <= 0){
-            $message = "Ce produit est en rupture de stock :(";
+            echo "Ce produit est en rupture de stock :(";
         } else
         {
             return $produit;

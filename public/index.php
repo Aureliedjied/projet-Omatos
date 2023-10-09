@@ -85,7 +85,7 @@ $router->map(
     '/panier',
     [
         'method' => 'listPanier',
-        'controller' => '\App\Controllers\ReservationController'
+        'controller' => '\App\Controllers\PanierController'
     ],
     'client-panier'
 );
@@ -110,6 +110,11 @@ $router->map(
 );
 
 
+// Routes pour l'API qui s'occupera du panier :
+
+$router->map('GET', '/api/panier', ['method' => 'getPanier', 'controller' => '\App\Controllers\Api\PanierController'], 'api-panier');
+
+$router->map('POST', '/api/panier/ajouter', ['method' => 'ajouterAuPanier', 'controller' => '\App\Controllers\Api\PanierController'], 'api-panier-ajouter');
 
 
 

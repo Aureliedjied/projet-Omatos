@@ -21,7 +21,7 @@
                         <div class="portfolio-caption-subheading text-muted"><?= $produit->getPrice() ?>€</div>
                     </div>
                         <div>
-                        <button class="btn btn-primary" id="produit<?= $produit->getName() ?>">
+                        <button class="btn btn-primary" id="ajouterAuPanier<?= $produit->getId() ?>">
                         <input type="number" id="quantiteProduit<?= $produit->getId() ?>" value="0" min="0">
                         <i class="fas fa-shopping-cart"></i> Ajouter au Panier
                         </button>
