@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 
 use App\Models\Panier;
-use App\Models\Produit;
+use App\Models\Item;
 
 
 class PanierController extends CoreController
@@ -13,20 +13,20 @@ class PanierController extends CoreController
 {
 public function listPanier()
     {
-        $this->show("client/panier");
+        $this->show("user/panier");
     }   
 
     public function addToPanier()
     {
-        $produitId = $_POST['produit_id'];
-        $quantite = $_POST['quantite'];
+        $itemId = $_POST['itemId'];
+        $quantity = $_POST['quantity'];
 
-        $produit = Produit::find($produitId);
+        $itemId = Item::find($itemId);
 
         $panier = new Panier();
 
         // Ajoutez le produit au panier
-        $panier->addProduit($produit, $quantite);
+        $panier->addItem($itemId, $quantity);
 
     }
 }

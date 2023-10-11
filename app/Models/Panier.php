@@ -7,22 +7,22 @@ use PDO;
 
 class Panier extends CoreModel
 {
-    private $produits = [];
+    private $items = [];
 
 
-    public function addProduit(Produit $produit, $quantite)
+    public function addItem(Item $item, $quantity)
     {
         // Ajoute un produit au panier
-        $this->produits[] = [
-            'produit' => $produit,
-            'quantite' => $quantite,
+        $this->items[] = [
+            'item' => $item,
+            'quantity' => $quantity,
         ];
     }
 
-    public function getProduits()
+    public function getItems()
     {
         // Récupère les produits dans le panier
-        return $this->produits;
+        return $this->items;
     }
 
 }

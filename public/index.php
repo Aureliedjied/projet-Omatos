@@ -17,6 +17,7 @@ if (array_key_exists('BASE_URI', $_SERVER)) {
 }
 
 
+
 // Page d'accueil :
 
 $router->map(
@@ -34,9 +35,9 @@ $router->map(
     '/produits',
     [
         'method' => 'list',
-        'controller' => '\App\Controllers\ProduitController' 
+        'controller' => '\App\Controllers\ItemController' 
     ],
-    'produits-list'
+    'items-list'
 );
 
 $router->map(
@@ -44,9 +45,9 @@ $router->map(
     '/produit[i:id]',
     [
         'method' => 'listOne',
-        'controller' => '\App\Controllers\ProduitController' 
+        'controller' => '\App\Controllers\ItemController' 
     ],
-    'produit-detail'
+    'item-detail'
 );
 
 $router->map(
@@ -54,9 +55,9 @@ $router->map(
     '/connexion',
     [
         'method' => 'login',
-        'controller' => '\App\Controllers\ClientController'
+        'controller' => '\App\Controllers\UserController'
     ],
-    'client-login'
+    'user-login'
 );
 
 $router->map(
@@ -64,9 +65,9 @@ $router->map(
     '/deconnexion',
     [
         'method' => 'logout',
-        'controller' => '\App\Controllers\ClientController'
+        'controller' => '\App\Controllers\UserController'
     ],
-    'client-logout'
+    'user-logout'
 );
 
 $router->map(
@@ -74,9 +75,9 @@ $router->map(
     '/connexion',
     [
         'method' => 'loginValid',
-        'controller' => '\App\Controllers\ClientController' 
+        'controller' => '\App\Controllers\UserController' 
     ],
-    'client-loginValid'
+    'user-loginValid'
 );
 
 
@@ -87,7 +88,7 @@ $router->map(
         'method' => 'listPanier',
         'controller' => '\App\Controllers\PanierController'
     ],
-    'client-panier'
+    'user-panier'
 );
 
 $router->map(
@@ -95,26 +96,19 @@ $router->map(
     '/client',
     [
         'method' => 'add',
-        'controller' => '\App\Controllers\ClientController' 
+        'controller' => '\App\Controllers\UserController' 
     ],
-    'client-add'
+    'user-add'
 );
 $router->map(
     'POST',
     '/client',
     [
         'method' => 'addValid',
-        'controller' => '\App\Controllers\ClientController' 
+        'controller' => '\App\Controllers\UserController' 
     ],
-    'client-addValid'
+    'user-addValid'
 );
-
-
-// Routes pour l'API qui s'occupera du panier :
-
-$router->map('GET', '/api/panier', ['method' => 'getPanier', 'controller' => '\App\Controllers\Api\PanierController'], 'api-panier');
-
-$router->map('POST', '/api/panier/ajouter', ['method' => 'ajouterAuPanier', 'controller' => '\App\Controllers\Api\PanierController'], 'api-panier-ajouter');
 
 
 
