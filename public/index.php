@@ -1,8 +1,8 @@
 <?php
 
-
 require_once '../vendor/autoload.php';
 session_start();
+
 
 $router = new AltoRouter();
 
@@ -15,6 +15,7 @@ if (array_key_exists('BASE_URI', $_SERVER)) {
     
     $_SERVER['BASE_URI'] = '/';
 }
+
 
 
 // Page d'accueil :
@@ -34,20 +35,32 @@ $router->map(
     '/produits',
     [
         'method' => 'list',
-        'controller' => '\App\Controllers\ProduitController' 
+        'controller' => '\App\Controllers\ItemController' 
     ],
-    'produits-list'
+    'items-list'
 );
 
+<<<<<<< HEAD
+=======
+$router->map(
+    'GET',
+    '/produit[i:id]',
+    [
+        'method' => 'listOne',
+        'controller' => '\App\Controllers\ItemController' 
+    ],
+    'item-detail'
+);
+>>>>>>> 03f9ecf3f19c3755dcdf163f150dde3d8083a327
 
 $router->map(
     'GET',
     '/connexion',
     [
         'method' => 'login',
-        'controller' => '\App\Controllers\ClientController'
+        'controller' => '\App\Controllers\UserController'
     ],
-    'client-login'
+    'user-login'
 );
 
 $router->map(
@@ -55,9 +68,9 @@ $router->map(
     '/deconnexion',
     [
         'method' => 'logout',
-        'controller' => '\App\Controllers\ClientController'
+        'controller' => '\App\Controllers\UserController'
     ],
-    'client-logout'
+    'user-logout'
 );
 
 $router->map(
@@ -65,9 +78,9 @@ $router->map(
     '/connexion',
     [
         'method' => 'loginValid',
-        'controller' => '\App\Controllers\ClientController' 
+        'controller' => '\App\Controllers\UserController' 
     ],
-    'client-loginValid'
+    'user-loginValid'
 );
 
 
@@ -76,9 +89,9 @@ $router->map(
     '/panier',
     [
         'method' => 'listPanier',
-        'controller' => '\App\Controllers\ReservationController'
+        'controller' => '\App\Controllers\PanierController'
     ],
-    'client-panier'
+    'user-panier'
 );
 
 $router->map(
@@ -86,21 +99,19 @@ $router->map(
     '/client',
     [
         'method' => 'add',
-        'controller' => '\App\Controllers\ClientController' 
+        'controller' => '\App\Controllers\UserController' 
     ],
-    'client-add'
+    'user-add'
 );
 $router->map(
     'POST',
     '/client',
     [
         'method' => 'addValid',
-        'controller' => '\App\Controllers\ClientController' 
+        'controller' => '\App\Controllers\UserController' 
     ],
-    'client-addValid'
+    'user-addValid'
 );
-
-
 
 
 

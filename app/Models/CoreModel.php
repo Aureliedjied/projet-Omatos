@@ -8,8 +8,8 @@ abstract class CoreModel
 {
     protected $id;
     protected $name;
-    protected $item_id;
-    protected $quantite;
+    protected $itemId;
+    protected $quantity;
     
 
     /**
@@ -55,9 +55,9 @@ abstract class CoreModel
     /**
      * Get the value of item_id
      */ 
-    public function getItem_id()
+    public function getItemId()
     {
-        return $this->item_id;
+        return $this->itemId;
     }
 
     /**
@@ -65,9 +65,9 @@ abstract class CoreModel
      *
      * @return  self
      */ 
-    public function setItem_id($item_id)
+    public function setItemId($itemId)
     {
-        $this->item_id = $item_id;
+        $this->itemId = $itemId;
 
         return $this;
     }
@@ -75,9 +75,9 @@ abstract class CoreModel
     /**
      * Get the value of quantite
      */ 
-    public function getQuantite()
+    public function getQuantity()
     {
-        return $this->quantite;
+        return $this->quantity;
     }
 
     /**
@@ -85,9 +85,9 @@ abstract class CoreModel
      *
      * @return  self
      */ 
-    public function setQuantite($quantite)
+    public function setQuantity($quantity)
     {
-        $this->quantite = $quantite;
+        $this->quantity = $quantity;
 
         return $this;
     }

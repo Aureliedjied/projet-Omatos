@@ -9,18 +9,18 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="<?= $router->generate('main-home') ?>">Accueil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('produits-list') ?>">Produits</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('client-panier') ?>">Panier</a></li>
-                        <?php if(!isset($_SESSION["client"])): ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('items-list') ?>">Produits</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('user-panier') ?>">Panier</a></li>
+                        <?php if(!isset($_SESSION["user"])): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('client-login') ?>">Connexion</a>
+                        <a class="nav-link" href="<?= $router->generate('user-login') ?>">Connexion</a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $router->generate('client-logout') ?>">Deconnexion</a>
+                        <a class="nav-link" href="<?= $router->generate('user-logout') ?>">Deconnexion</a>
                     </li>
                 <?php endif ?>
-                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('client-add') ?>">S'inscrire</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?= $router->generate('user-add') ?>">S'inscrire</a></li>
                     </ul>
                 </div>
             </div>

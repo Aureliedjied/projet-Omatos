@@ -2,43 +2,52 @@
 
 namespace App\Controllers;
 
-use App\Models\Client;
+use App\Models\Users;
 
 
-class ClientController extends CoreController
+class UserController extends CoreController
 {
     public function login()
     {
-        $this->show('client/login');
+        $this->show('user/login');
     }
 
-    public function loginValid(){
+    public function loginValid()
+    {
+
+        // Vérification des champs POST
+        if (!isset($_POST['email'], $_POST['password'])) {
+        $this->redirect("user-login");
+        return;
+        }
 
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        $client = Client::findByEmail($email);
-        // erreur appropriée ici (vu en cours)
-        if($client && password_verify($password,$client->getPassword())){
+        // Recherche de l'utilisateur par e-mail
+        $user = Users::findByEmail($email);
 
-            $_SESSION["client"] = $client;
-            $this->redirect("main-home");
-        }else{
-            $this->redirect("client-login");
+        // Vérification du mot de passe
+        if ($user && password_verify($password, $user->getPassword())) {
+
+        $_SESSION["user"] = $user;
+        $this->redirect("main-home");
+        } else {
+        $this->redirect("user-login");
         }
     }
 
+
     public function logout(){
 
-
-        unset($_SESSION["client"]);
+        unset($_SESSION["user"]);
         $this->redirect("main-home");
     }
 
     public function add(){
 
 
-        $this->show('client/form');
+        $this->show('user/form');
     }
 
     public function addValid(){
@@ -47,7 +56,7 @@ class ClientController extends CoreController
         $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
         $password = filter_input(INPUT_POST, "password");
         $name = filter_input(INPUT_POST, "name");
-        $adresse = filter_input(INPUT_POST,"adresse");
+        $adress = filter_input(INPUT_POST,"adress");
 
         // j'initialise mon $errors
         $errors = [];
@@ -63,12 +72,12 @@ class ClientController extends CoreController
         }
 
 
-        $client = new Client();
-        $client->setEmail($email);
+        $user = new Users();
+        $user->setEmail($email);
         // ! pensez à hasher le mot de passe
-        $client->setPassword(password_hash($password, PASSWORD_DEFAULT));
-        $client->setName($name);
-        $client->setAdresse($adresse);
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $user->setName($name);
+        $user->setAdress($adress);
 
 
           // Gestion des erreurs
@@ -77,10 +86,10 @@ class ClientController extends CoreController
         echo "Une erreur est survenue :";
         print_r($errors);
         // Redirection vers la page de connexion
-        $this->redirect("client-loginValid");
+        $this->redirect("user-login");
     } else {
         // Enregistrement du client dans la base de données
-        $result = $client->insert();
+        $result = $user->insert();
 
         if ($result) {
             // Redirection vers la page principale

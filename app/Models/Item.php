@@ -6,10 +6,10 @@ use App\Utils\Database;
 use PDO;
 
 
-class Produit extends CoreModel
+class Item extends CoreModel
 {
     private $description;
-    private $picture;
+    private $image;
     private $price;
     private $stock;
 
@@ -19,9 +19,9 @@ class Produit extends CoreModel
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `items`';
         $pdoStatement = $pdo->query($sql);
-        $produits = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Produit');
+        $items = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Item');
 
-        return $produits;
+        return $items;
     }
 
     public static function find(int $id)
@@ -39,19 +39,19 @@ class Produit extends CoreModel
             ":id" => $id
         ]);
 
-        $produit = $query->fetchObject('App\Models\Produit');
+        $item = $query->fetchObject('App\Models\Item');
 
-        if (!$produit) {
+        if (!$item) {
             
-            return null;
+           echo "Une erreur s'est produite lors de la récupération du produit  ";
         }
 
         // Ici je prévoie la rupture : si le stock de mon produit est = ou inferieur à 0 :
-        if ($produit->stock <= 0){
-            $message = "Ce produit est en rupture de stock :(";
+        if ($item->stock <= 0){
+            echo "Ce produit est en rupture de stock :(";
         } else
         {
-            return $produit;
+            return $item;
         }
     }
 
@@ -80,15 +80,15 @@ class Produit extends CoreModel
     }
 
 
-    public function getPicture()
+    public function getImage()
     {
-        return $this->picture;
+        return $this->image;
     }
 
 
-    public function setPicture($picture)
+    public function setImage($image)
     {
-        $this->picture = $picture;
+        $this->image = $image;
     }
 
     public function getPrice()

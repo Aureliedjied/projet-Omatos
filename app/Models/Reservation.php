@@ -8,10 +8,11 @@ use PDO;
 
 class Reservation extends CoreModel
 {
-    private $date_debut;
-    private $date_retour;
-    private $client_id;
+    private $dateDebut;
+    private $dateRetour;
+    private $userID;
     private $status;
+    private $total;
    
 
     // Fonction pour ajouter au produit :
@@ -29,7 +30,6 @@ class Reservation extends CoreModel
 
     public static function find(int $item_id, $client_id)
     {
-
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `reservations` WHERE `client_id` = :clientId AND `item_id` = :itemId';
         $query = $pdo->prepare($sql);
@@ -53,29 +53,38 @@ class Reservation extends CoreModel
         ]);
     }
 
-
-    public function getDate_retour()
+    public function getDateDebut()
     {
-        return $this->date_retour;
+        return $this->dateDebut;
     }
 
 
-    public function setDate_retour($date_retour)
+    public function setDateDebut($dateDebut)
     {
-        $this->date_retour = $date_retour;
-
-    }
-
-    public function getClient_id()
-    {
-        return $this->client_id;
+        $this->dateDebut = $dateDebut;
     }
 
 
-    public function setClient_id($client_id)
+    public function setDateRetour($dateRetour)
     {
-        $this->client_id = $client_id;
+        $this->dateRetour = $dateRetour;
+    }
 
+
+    public function getDateRetour()
+    {
+        return $this->dateRetour;
+    }
+
+
+    public function getUserID()
+    {
+        return $this->userID;
+    }
+
+    public function setUserID($userID)
+    {
+        $this->userID = $userID;
     }
 
     public function getStatus()
@@ -86,18 +95,17 @@ class Reservation extends CoreModel
     public function setStatus($status)
     {
         $this->status = $status;
-
     }
 
-    public function getDate_debut()
+
+    public function getTotal()
     {
-        return $this->date_debut;
+        return $this->total;
     }
 
-
-    public function setDate_debut($date_debut)
+    public function setTotal($total)
     {
-        $this->date_debut = $date_debut;
-
+        $this->total = $total;
     }
+
 }
