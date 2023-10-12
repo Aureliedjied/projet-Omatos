@@ -1,45 +1,59 @@
-const app = {
 
-    // J'initialise mon module :
-    init: function () {
+// Fonction qui ouvre et remplir la modale :
 
-    // j'initialise le panier :
-        app.panier.init();
+function openModal(name, description, price, picture) {
+    const modal = document.getElementById('produitModal');
+    const modalTitle = document.getElementById('produitModalLabel');
+    const modalContent = document.getElementById('modalContent');
 
-    },
-    // Je définis le panier qui sera un objet :
-    panier :{
-        // Mon objet contiendra les produits ( dans un tableau:)
-        produits: [],
-        // Je réinitialise le panier avec l'ajout du tableau défini à l'interieur de celui ci
-        init: function (){
-            
-            // Je selectionne tous les boutons avec la class css:
-            const bouton = document.querySelectorAll('.btn-primary');
-
-            // je boucle sur chaque bouton ( à défaut de vouloir ajouter un 2e id)
-            // Je peux maintenant ajouter l'evenement :
-            bouton.forEach(bouton => {
-                bouton.addEventListener("click", app.panier.ajoutProduit);
-            });
-        }
-
-    },
-
-    // Maintenant, je crée ma fonction d'ajout au panier :
-    ajoutProduit : function (event){
-
-        // Je récupere le boutton et son evenement :
-        const bouton = event.currentTarget;
-
-        // Je récupère l'ID du produit à partir de l'ID du bouton
-        // Ici j'utilise replace car j'ai défini mon id par "produit", qui sera donc remplacé par son id reel:
-        const produitId = bouton.id.replace('produit', '');
-
-        // je récupere la quantité choisie et le lie a mon item :
-        const quantite = document.getElementById("quantiteProduit" + produitId);
+    // Ici, je supprime tous les "enfants" de la modal
+    while (modalContent.firstChild) {
+        modalContent.firstChild.remove();
     }
+
+    // Je remplace le texte par le nom du produit :
+    modalTitle.textContent = name;
+
+    // Affichage de l'image du produit :
+    const image = document.createElement('img');
+    image.src = picture;
+    image.alt = 'image du produit';
+    image.className = 'img-fluid';
+
+    // Je créee une balise p pour y inclure la description :
+    const descriptionElement = document.createElement('p');
+    descriptionElement.textContent = 'Description: ' + description;
+
+    // idem pour le prix :
+    const priceElement = document.createElement('p');
+    priceElement.textContent = 'Prix: ' + price + '€';
+
+    // Je les ajoute maintenant à la modal :
+    modalContent.appendChild(image);
+    modalContent.appendChild(descriptionElement);
+    modalContent.appendChild(priceElement);
+
+    // J'ajoute une classe pour montrer/cacher la modal (vu en cours):
+    modal.classList.add('show');
+    modal.style.display = 'block';
+
+    // Ajout d'un écouteur d'événements pour fermer la modale si on clique à l'extérieur
+    modal.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
 }
 
-// ici, je charge mon module, une fois le DOM (elements html) chargés :
-document.addEventListener('DOMContentLoaded', app.init);
+// Fonction qui ferme la modale :
+function closeModal() {
+    const modal = document.getElementById('produitModal');
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+}
+
+
+
+
+
+

@@ -39,15 +39,6 @@ $router->map(
     'produits-list'
 );
 
-$router->map(
-    'GET',
-    '/produit[i:id]',
-    [
-        'method' => 'listOne',
-        'controller' => '\App\Controllers\ProduitController' 
-    ],
-    'produit-detail'
-);
 
 $router->map(
     'GET',

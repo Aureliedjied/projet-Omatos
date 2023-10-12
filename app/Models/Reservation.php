@@ -14,6 +14,8 @@ class Reservation extends CoreModel
     private $status;
    
 
+    // Fonction pour ajouter au produit :
+    
 
     public static function findAll()
     {
@@ -25,20 +27,30 @@ class Reservation extends CoreModel
         return $reservations;
     }
 
-    public static function find(int $id)
+    public static function find(int $item_id, $client_id)
     {
 
         $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM `reservations` WHERE `id` = :id' ;
+        $sql = 'SELECT * FROM `reservations` WHERE `client_id` = :clientId AND `item_id` = :itemId';
         $query = $pdo->prepare($sql);
-        $reservation = $query->execute([
-            ":id" => $id
+        $query->execute([
+            ':clientId' => $client_id,
+            ':itemId' => $item_id
         ]);
 
-        $reservation = $query->fetchObject('App\Models\Reservation');
+        return $query->fetchObject('App\Models\Reservation');
+    }
 
-
-        return $reservation;
+    public static function create(int $client_id, int $item_id, int $quantity)
+    {
+        $pdo = Database::getPDO();
+        $sql = 'INSERT INTO `reservations` (`client_id`, `item_id`, `quantity`) VALUES (:clientId, :itemId, :quantity)';
+        $query = $pdo->prepare($sql);
+        $query->execute([
+            ':clientId' => $client_id,
+            ':itemId' => $item_id,
+            ':quantity' => $quantity
+        ]);
     }
 
 

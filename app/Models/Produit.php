@@ -55,6 +55,17 @@ class Produit extends CoreModel
         }
     }
 
+    public static function findInStock()
+    {
+    $pdo = Database::getPDO();
+    $sql = 'SELECT * FROM `items` WHERE `stock` > 0';
+    $pdoStatement = $pdo->query($sql);
+    $produitsEnStock = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Produit');
+
+    return $produitsEnStock;
+    }
+
+
 
     public function getDescription()
     {
