@@ -16,49 +16,44 @@ class Users extends CoreModel
     {
         $pdo = Database::getPDO();
 
-        $filteredEmail = filter_var($this->email, FILTER_VALIDATE_EMAIL);
-
-        if (!$filteredEmail || empty($this->name) || empty($this->address)) {
-            return false;
-        }
-
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (email, password, name, address) VALUES (:email, :password, :name, :address)";
+        $sql = "INSERT INTO user (email, password, name, address) VALUES (:email, :password, :name, :address)";
 
+        try {
         $query = $pdo->prepare($sql);
 
         $result = $query->execute([
-            ":email" => $filteredEmail, 
+            ":email" => $this->email,
             ":password" => $hashedPassword,
             ":name" => $this->name,
             ":address" => $this->address,
-        ]);
+            ]);
 
-        if ($result) {
+            if ($result) {
             $this->id = $pdo->lastInsertId();
+            return true;
+            } else {
+            return false; 
+            }
+        } catch (\Exception $e) {
+
+        return false; 
         }
-
-        else ( "Probleme lors de l'inscription");
-
-        return $result;
     }
 
-    public static function findByEmail($email, $password)
+
+    public static function findByEmail($email)
     {
         $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM `users` WHERE `email` = :email';
+        $sql = 'SELECT * FROM `user` WHERE `email` = :email';
         $query = $pdo->prepare($sql);
         $query->execute([":email" => $email]);
 
-        $user = $query->fetchObject('App\Models\Users');
+        $users = $query->fetchObject('App\Models\Users');
 
-
-        if ($user && password_verify($password, $user->getPassword())) {
-            return $user;
-        }
-
-        return $user;
+        // var_dump($user);
+        return $users;
     }
 
 

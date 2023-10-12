@@ -12,24 +12,33 @@ class UserController extends CoreController
         $this->show('user/login');
     }
 
-    public function loginValid(){
+    public function loginValid()
+    {
+
+        // Vérification des champs POST
+        if (!isset($_POST['email'], $_POST['password'])) {
+        $this->redirect("user-login");
+        return;
+        }
 
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        $user = Users::findByEmail($email, $password);
-        // erreur appropriée ici (vu en cours)
-        if($user && password_verify($password,$user->getPassword())){
+        // Recherche de l'utilisateur par e-mail
+        $user = Users::findByEmail($email);
 
-            $_SESSION["user"] = $user;
-            $this->redirect("main-home");
-        }else{
-            $this->redirect("user-login");
+        // Vérification du mot de passe
+        if ($user && password_verify($password, $user->getPassword())) {
+
+        $_SESSION["user"] = $user;
+        $this->redirect("main-home");
+        } else {
+        $this->redirect("user-login");
         }
     }
 
-    public function logout(){
 
+    public function logout(){
 
         unset($_SESSION["user"]);
         $this->redirect("main-home");
@@ -77,7 +86,7 @@ class UserController extends CoreController
         echo "Une erreur est survenue :";
         print_r($errors);
         // Redirection vers la page de connexion
-        $this->redirect("user-loginValid");
+        $this->redirect("user-login");
     } else {
         // Enregistrement du client dans la base de données
         $result = $user->insert();
