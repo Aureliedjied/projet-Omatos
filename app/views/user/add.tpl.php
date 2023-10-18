@@ -3,7 +3,7 @@
 <img class="mx-auto rounded-circle" src="assets/images/map-image.png" alt="..." />
             <div class="container">
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Inscrivez vous</h2>
+                    <h2 class="section-heading text-uppercase">Rejoignez nous !</h2>
                     <h3 class="section-subheading text-muted">Veuillez remplir tous les champs</h3>
                 </div>
 
@@ -20,13 +20,14 @@
             <label for="password" class="form-label">Mot de passe</label>
             <input type="password" class="form-control" id="mot de passe" placeholder="**********" name="password" value="<?= isset($user) ? $user->getPassword() : '' ?>">
             <small>
-                Minimum 8 caractères, au moins une lettre, un chiffre et un caractère spécial 
+                Minimum 5 caractères, au moins une lettre, un chiffre et un caractère spécial 
             </small>
         </div>
         </div>
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <div class="mb-3">
             <label for="addresse" class="form-label">Adresse</label>
-            <input value="<?= isset($user) ? $user->getAdress() : '' ?>" type="text" class="form-control" id="addresse" placeholder="Votre adresse" name="adress">
+            <input value="<?= isset($user) ? $user->getAddress() : '' ?>" type="text" class="form-control" id="addresse" placeholder="Votre adresse" name="address">
         </div>
         </div>
         <button type="submit" class="btn btn-success">S'inscrire</button>

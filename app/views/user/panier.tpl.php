@@ -15,12 +15,11 @@
             </div>
         </div>
 
-    <!-- ici mon panier : -->
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Panier</label>
             <div class="col-sm-10">
                 <ul id="panier" class="list-group mb-2">
-                    <!-- Le contenu du panier sera ajouté ici dynamiquement avec JavaScript ( fichier app.js )-->
+
                 </ul>
                 <h5>Total: <span id="totalPanier">0</span> €</h5>
             </div>

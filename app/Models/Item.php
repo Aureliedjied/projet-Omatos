@@ -8,9 +8,10 @@ use PDO;
 
 class Item extends CoreModel
 {
+
     private $description;
-    private $image;
     private $price;
+    private $image;
     private $stock;
 
 
@@ -60,9 +61,9 @@ class Item extends CoreModel
     $pdo = Database::getPDO();
     $sql = 'SELECT * FROM `items` WHERE `stock` > 0';
     $pdoStatement = $pdo->query($sql);
-    $produitsEnStock = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Produit');
+    $itemStock = $pdoStatement->fetchAll(PDO::FETCH_CLASS, 'App\Models\Item');
 
-    return $produitsEnStock;
+    return $itemStock;
     }
 
 

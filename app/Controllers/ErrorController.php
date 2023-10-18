@@ -11,21 +11,21 @@ class ErrorController extends CoreController
         
     }
     
-    public function err404()
+    public function error404()
     {
         // On envoie le header 404
         http_response_code(404);
 
         // Puis on gère l'affichage
-        $this->show('error/err404');
+        $this->show('error/error404');
     }
 
-    public function err403()
+    public function error403()
     {
         // On envoie le header 404
         http_response_code(403);
 
         // Puis on gère l'affichage
-        $this->show('error/err403');
+        $this->show('error/error403');
     }
 }

@@ -14,7 +14,7 @@ class ItemController extends CoreController
     public function list()
     {
         $items = Item::findAll();
-    var_dump($items);
+    // var_dump($items);
     // Ici j'appelle ma méthode show pour intégrer la liste de mes produits
         $this->show("items/list",[
             "items" => Item::findAll()

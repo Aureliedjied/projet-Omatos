@@ -7,13 +7,9 @@ class CoreController
 
     protected function show(string $viewName, $viewData = [])
     {
-        // On globalise $router car on ne sait pas faire mieux pour l'instant
+        
         global $router;
 
-        // Comme $viewData est déclarée comme paramètre de la méthode show()
-        // les vues y ont accès
-        // ici une valeur dont on a besoin sur TOUTES les vues
-        // donc on la définit dans show()
         $viewData['currentPage'] = $viewName;
 
         // définir l'url absolue pour nos assets
@@ -32,6 +28,7 @@ class CoreController
         require_once __DIR__ . '/../views/layout/footer.tpl.php';
     }
 
+    // Méthode de redirection évitant les répétition de "header"
     protected function redirect(string $routeName, array $params=[])
     {
         global $router;
@@ -40,6 +37,36 @@ class CoreController
         header('Location: '.$router->generate($routeName, $params));
         exit;
     }
+
+    protected function generateCsrfToken() {
+        // Génération du token CSRF
+        $csrfToken = bin2hex(random_bytes(32));
+
+        // Stockage du token dans la session
+        $_SESSION['csrf_token'] = $csrfToken;
+
+        return $csrfToken;
+    }
+
+    protected function checkAuthorization(array $roles = [])
+    {
+    // Vérifiez si l'utilisateur est connecté
+    if (isset($_SESSION["user"])) {
+        // Vérifiez si l'utilisateur a le rôle requis
+        if (empty($roles) || in_array($_SESSION["user"]->getRole(), $roles)) {
+            return;
+        } else {
+            // Redirigez vers une page d'erreur 403 (Accès interdit)
+            $this->show('error/403');
+            exit;
+        }
+            } else {
+            // Redirigez vers la page de connexion
+            $this->redirect("user-login");
+            }
+    }
+
+
 }
 
      

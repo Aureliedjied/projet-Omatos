@@ -5,7 +5,7 @@
     <p>
         Tu n'as pas les droits nécéssaires ...
     </p>
-    <a href="<?= $router->generate('main-home') ?>">retour à l'accueil</a>
+    <a href="<?= $this->router->generate('main-home') ?>">retour à l'accueil</a>
     <br>
     <br>
     <br>

@@ -1,7 +1,7 @@
 
-// Fonction qui ouvre et remplir la modale :
+// Fonction qui ouvre et remplir la modale des produits:
 
-function openModal(name, description, price, picture) {
+function openProductModal(name, description, price, picture) {
     const modal = document.getElementById('produitModal');
     const modalTitle = document.getElementById('produitModalLabel');
     const modalContent = document.getElementById('modalContent');
@@ -40,13 +40,13 @@ function openModal(name, description, price, picture) {
     // Ajout d'un écouteur d'événements pour fermer la modale si on clique à l'extérieur
     modal.addEventListener('click', function (event) {
         if (event.target === modal) {
-            closeModal();
+            closeProductModal();
         }
     });
 }
 
-// Fonction qui ferme la modale :
-function closeModal() {
+// Fonction qui ferme la modale des produits :
+function closeProductModal() {
     const modal = document.getElementById('produitModal');
     modal.classList.remove('show');
     modal.style.display = 'none';

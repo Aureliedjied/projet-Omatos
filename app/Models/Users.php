@@ -11,7 +11,21 @@ class Users extends CoreModel
     private $password;
     private $address;
     private $role;
+    
 
+    // Méthode pour voir tous les clients : 
+    public static function findAll()
+    {
+        $pdo = Database::getPDO();
+        $sql = 'SELECT * FROM user WHERE role = "user"';
+        $pdoStatement = $pdo->query($sql);
+        $users = $pdoStatement->fetchAll(\PDO::FETCH_CLASS, 'App\Models\Users');
+
+        return $users;
+    }
+
+
+    // Méthode pour inscrire un visiteur :
     public function insert()
     {
         $pdo = Database::getPDO();
@@ -34,11 +48,12 @@ class Users extends CoreModel
             $this->id = $pdo->lastInsertId();
             return true;
             } else {
-            return false; 
+                throw new \Exception("Échec de l'insertion dans la base de données");
             }
         } catch (\Exception $e) {
-
-        return false; 
+            
+            error_log($e->getMessage());
+            return false;
         }
     }
 
@@ -48,24 +63,25 @@ class Users extends CoreModel
         $pdo = Database::getPDO();
         $sql = 'SELECT * FROM `user` WHERE `email` = :email';
         $query = $pdo->prepare($sql);
-        $query->execute([":email" => $email]);
+        $query->bindParam(':email', $email, PDO::PARAM_STR);
+        $query->execute();
 
         $users = $query->fetchObject('App\Models\Users');
 
-        // var_dump($user);
+        // dd($users);
         return $users;
     }
 
 
 
     
-    public function getAdress()
+    public function getAddress()
     {
         return $this->address;
     }
 
 
-    public function setAdress($address)
+    public function setAddress( string $address)
     {
         $this->address = $address;
 
@@ -77,7 +93,7 @@ class Users extends CoreModel
     }
 
 
-    public function setEmail($email)
+    public function setEmail( string $email)
     {
         $this->email = $email;
 
@@ -90,7 +106,7 @@ class Users extends CoreModel
     }
 
 
-    public function setPassword($password)
+    public function setPassword( string $password)
     {
         $this->password = $password;
 
@@ -102,7 +118,7 @@ class Users extends CoreModel
     }
 
 
-    public function setRole($role)
+    public function setRole( string $role)
     {
         $this->role = $role;
 

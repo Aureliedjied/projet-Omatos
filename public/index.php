@@ -1,6 +1,9 @@
 <?php
 
 require_once '../vendor/autoload.php';
+
+ini_set("session.cookie_httponly", 1);
+
 session_start();
 
 
@@ -40,8 +43,6 @@ $router->map(
     'items-list'
 );
 
-<<<<<<< HEAD
-=======
 $router->map(
     'GET',
     '/produit[i:id]',
@@ -51,7 +52,6 @@ $router->map(
     ],
     'item-detail'
 );
->>>>>>> 03f9ecf3f19c3755dcdf163f150dde3d8083a327
 
 $router->map(
     'GET',
@@ -64,8 +64,18 @@ $router->map(
 );
 
 $router->map(
+    'POST',
+    '/connexion',
+    [
+        'method' => 'loginValid',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-loginValid'
+);
+
+$router->map(
     'GET',
-    '/deconnexion',
+    '/Deconnexion',
     [
         'method' => 'logout',
         'controller' => '\App\Controllers\UserController'
@@ -74,13 +84,23 @@ $router->map(
 );
 
 $router->map(
-    'POST',
-    '/connexion',
+    'GET',
+    '/inscription',
     [
-        'method' => 'loginValid',
-        'controller' => '\App\Controllers\UserController' 
+        'method' => 'add',
+        'controller' => '\App\Controllers\UserController'
     ],
-    'user-loginValid'
+    'user-add'
+);
+
+$router->map(
+    'POST',
+    '/inscription',
+    [
+        'method' => 'addValid',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-addValid'
 );
 
 
@@ -96,24 +116,13 @@ $router->map(
 
 $router->map(
     'GET',
-    '/client',
+    '/admin',
     [
-        'method' => 'add',
-        'controller' => '\App\Controllers\UserController' 
+        'method' => 'dashboard',
+        'controller' => '\App\Controllers\MainController'
     ],
-    'user-add'
+    'admin-dashboard'
 );
-$router->map(
-    'POST',
-    '/client',
-    [
-        'method' => 'addValid',
-        'controller' => '\App\Controllers\UserController' 
-    ],
-    'user-addValid'
-);
-
-
 
 
 
