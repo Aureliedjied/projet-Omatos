@@ -4,7 +4,7 @@ namespace App\Models;
 
 // Classe mère de tous les Models
 // On centralise ici toutes les propriétés en commun ainsi que les méthodes utiles pour TOUS les Models
-abstract class CoreModel
+class CoreModel
 {
     protected $id;
     protected $name;

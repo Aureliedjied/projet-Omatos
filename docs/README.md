@@ -5,8 +5,8 @@ Le but de ce site :
 
 * proposer des locations en tarifs journaliers
 * le client aura une ou plusieurs réservations à son nom
-* la visibilité des produits sera disponibles/non disponibles
-* le client pourra faire une estimation d'un forfait selon une période choisie (via calendrier) en ajoutant un produit (via un click sur "ajouter")
+* la visibilité des produits sera "disponible/non disponible"
+* le client pourra faire une estimation d'un forfait selon une période choisie (via calendrier) en ajoutant un produit (via un click sur "ajouter au panier")
 
 
 ## Installation de
@@ -36,4 +36,5 @@ Le but de ce site :
 * photos importées via istock /pixabay (droits ok ) et icones de flaticon
 
 => Inclure également nos informations de connexions (config.ini) au fichier .gitignore
+=> Inclure le dossier VENDOR dans le .gitignore, trop lourd à push sur github !
   

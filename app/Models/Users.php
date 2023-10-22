@@ -17,7 +17,7 @@ class Users extends CoreModel
     public static function findAll()
     {
         $pdo = Database::getPDO();
-        $sql = 'SELECT * FROM user WHERE role = "user"';
+        $sql = 'SELECT * FROM user WHERE role = "client"';
         $pdoStatement = $pdo->query($sql);
         $users = $pdoStatement->fetchAll(\PDO::FETCH_CLASS, 'App\Models\Users');
 

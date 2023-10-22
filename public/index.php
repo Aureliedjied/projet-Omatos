@@ -125,6 +125,16 @@ $router->map(
 );
 
 
+$router->map(
+    'GET',
+    '/monespace',
+    [
+        'method' => 'dashboard',
+        'controller' => '\App\Controllers\UserController'
+    ],
+    'user-dashboard'
+);
+
 
 
 

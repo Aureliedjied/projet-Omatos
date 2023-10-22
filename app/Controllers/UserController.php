@@ -118,4 +118,29 @@ class UserController extends CoreController
         $this->redirect("main-home");
     }
 
+    public function dashboard($params)
+    {
+        // Vérifiez si l'utilisateur est un client
+        if (!$this->checkClient()) {
+            // Redirigez vers la page d'accueil ou une autre page appropriée
+            $this->redirect('main-home');
+        }
+    
+        // Récupérez l'email de l'utilisateur depuis les paramètres de l'URL
+        $email = $params['email'];
+    
+        // Récupérez les informations de l'utilisateur depuis la base de données
+        $client = Users::findByEmail($email);
+    
+        // Affichez la vue du tableau de bord
+        $this->show('user/dashboard', ['client' => $client]);
+    }
+    
+    public function checkClient()
+    {
+        // Vérifiez si l'utilisateur est connecté et a le rôle "client"
+        return isset($_SESSION['role']) && $_SESSION['role'] == 'client';
+    }
+    
+
 }

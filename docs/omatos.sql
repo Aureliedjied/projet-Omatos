@@ -5,6 +5,8 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+
+-- Table pour stocker les articles à louer
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -26,6 +28,8 @@ INSERT INTO `items` (`id`, `name`, `description`, `image`, `price`, `stock`) VAL
 (7,	'Drone DJI Mini 2',	'Drone ultra-léger et compact pour les débutants.',	'assets/images/items/mini2.jpg',	19.99,	9),
 (8,	'Appareil Photo Olympus OM-D',	'Appareil photo 4K reflex numérique avec 30,9 mégapixels.',	'assets/images/items/olympus.jpg',	9.99,	11);
 
+
+-- Table pour stocker les réservations ( panier )
 DROP TABLE IF EXISTS `reservations`;
 CREATE TABLE `reservations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -41,6 +45,7 @@ CREATE TABLE `reservations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+-- Table de liaison entre réservations et articles
 DROP TABLE IF EXISTS `reservation_items`;
 CREATE TABLE `reservation_items` (
   `reservationID` int(10) unsigned NOT NULL,
@@ -53,6 +58,7 @@ CREATE TABLE `reservation_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+-- Table pour stocker les utilisateurs
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -68,3 +74,11 @@ CREATE TABLE `user` (
 
 
 -- 2023-10-11 20:11:12
+
+-- requette pour voir une reservation complete :
+
+-- SELECT *
+-- FROM reservations
+-- JOIN reservation_items ON reservations.id = reservation_items.reservationID
+-- JOIN items ON reservation_items.itemID = items.id
+-- WHERE reservations.id = 1;

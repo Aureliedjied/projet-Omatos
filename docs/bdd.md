@@ -1,5 +1,14 @@
 # Bases de données
 
+## OMATOS
+
+
+* CONTENIR ( #id réservation 1, #id réservation 2, comprend )
+* ITEMS ( id item, nom item, description, image, prix, stock, #id réservation )
+* RESERVATIONS ( id réservation, date début, date fin, statut, total )
+* RESERVATIONS_ITEMS ( id réservation, id item, quantité )
+* USER ( id utilisateur, nom utilisateur, email, password, adresse, rôle, #id réservation )
+
 ## Relations entre les tables
 
 Les tables sont généralement reliées entre elles à l'aide de ce qu'on appelle des clés étrangères (Foreign Key). Ces clés étrangères font le lien avec une clé primaire (Primary Key) d'une autre table.
@@ -24,20 +33,5 @@ Cardinalités : 1 - N / 1 - N
 * Les tags peuvent se retrouver sur plusieurs produits (1 - N) / Les produits peuvent contenir plusieurs tags (1 - N)
 
 Lorque l'on a ce genre de relations, contrairement à la relation *one to many* on ne peut pas juste créer une clé étrangère car il y aurait plusieurs éléments (dont le nombre est indéfini) à lier. La solution passe par la création d'une table supplémentaire. Cette table contiendra les clés étrangères des 2 tables reliées.
-
-Par exemple dans le cas des tags :
-
-table tag
-id
-name
-
-table product
-id
-name
-...
-
-table product_has_tag
-product_id (clé étrangère reliée à l'id de product)
-tag_id (clé étrangère reliée à l'id de tag)
 
 ``

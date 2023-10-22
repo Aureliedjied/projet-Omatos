@@ -12,23 +12,30 @@
                     <li class="nav-item"><a class="nav-link" href="<?= $router->generate('items-list') ?>">Produits</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= $router->generate('user-panier') ?>">Panier</a></li>
 
-                    <?php if(!isset($_SESSION["user"])): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= $router->generate('user-login') ?>">Connexion</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= $router->generate('user-add') ?>">Inscription</a>
-                        </li>
-                    <?php else : ?>
-                        <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == 'admin'): ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= $router->generate('admin-dashboard') ?>">Tableau de bord admin</a>
-                            </li>
-                        <?php endif; ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= $router->generate('user-logout') ?>">Deconnexion</a>
-                        </li>
-                    <?php endif ?>
+                    <?php if (isset($_SESSION["user"])) : ?>
+    <?php if (isset($_SESSION["role"]) && $_SESSION["role"] == 'admin'): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?= $router->generate('admin-dashboard') ?>">Tableau de bord admin</a>
+        </li>
+    <?php else : ?>
+        <?php if (isset($client)): ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= $router->generate('user-dashboard', ['email' => $client->getEmail()]) ?>">Mon espace</a>
+            </li>
+        <?php endif; ?>
+    <?php endif; ?>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= $router->generate('user-logout') ?>">Deconnexion</a>
+    </li>
+<?php else : ?>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= $router->generate('user-login') ?>">Connexion</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="<?= $router->generate('user-add') ?>">Inscription</a>
+    </li>
+<?php endif; ?>
+
                 </ul>
             </div>
         </div>
